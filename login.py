@@ -1,25 +1,29 @@
 import streamlit as st
 from utils.auth import get_users, save_users, hash_password, verify_password
 
-# Set page configuration
 st.set_page_config(page_title="Modern Login", page_icon="🔑", layout="centered")
+
+# --- HIDE THE SIDEBAR ---
+st.markdown("""
+    <style>
+        div[data-testid="stSidebarNav"] {display: none;}
+    </style>
+""", unsafe_allow_html=True)
+
 
 def login_page():
     st.title("Modern Login & Sign Up")
     st.markdown("---")
 
-    # Initialize session state variables if they don't exist
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
         st.session_state.username = ""
 
-    # If user is already logged in, show a welcome message and a link to the profile
     if st.session_state.logged_in:
         st.success(f"Welcome back, {st.session_state.username}!")
         st.page_link("pages/profile.py", label="Go to your Profile")
         return
 
-    # Display Login/Sign Up radio buttons
     choice = st.radio("Login or Sign Up", ["Login", "Sign Up"], horizontal=True)
 
     if choice == "Login":
@@ -34,7 +38,7 @@ def login_page():
                 if user and verify_password(password, user["password"]):
                     st.session_state.logged_in = True
                     st.session_state.username = username
-                    st.rerun()  # Rerun the script to reflect the login state
+                    st.rerun()
                 else:
                     st.error("Invalid username or password.")
 
@@ -55,7 +59,13 @@ def login_page():
                     st.error("Username and password cannot be empty.")
                 else:
                     hashed_pass = hash_password(new_password)
-                    users.append({"username": new_username, "password": hashed_pass})
+                    users.append({
+                        "username": new_username,
+                        "password": hashed_pass,
+                        "firstName": "",
+                        "lastName": "",
+                        "dob": None
+                    })
                     save_users(users)
                     st.success("You have successfully signed up! Please log in.")
 
