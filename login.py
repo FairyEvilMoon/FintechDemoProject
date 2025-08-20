@@ -1,14 +1,19 @@
 import streamlit as st
 from utils.auth import get_users, save_users, hash_password, verify_password
 
-st.set_page_config(page_title="Modern Login", page_icon="🔑", layout="centered")
+st.set_page_config(page_title="Modern Login", page_icon="🔑", layout="centered", initial_sidebar_state="collapsed")
 
 # --- HIDE THE SIDEBAR ---
-st.markdown("""
-    <style>
-        div[data-testid="stSidebarNav"] {display: none;}
-    </style>
-""", unsafe_allow_html=True)
+st.markdown(
+    """
+<style>
+    [data-testid="collapsedControl"] {
+        display: none
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
 
 
 def login_page():
