@@ -19,7 +19,7 @@ if 'logged_in' not in st.session_state or not st.session_state.logged_in:
     st.stop()
 
 st.title(f"Welcome to your profile, {st.session_state.username}!")
-st.page_link("login.py", label="Back to Login Page")
+st.page_link("login.py", label="Back to Home Page")
 st.markdown("---")
 
 # --- USER DATA LOADING ---

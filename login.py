@@ -14,7 +14,7 @@ def login_page():
 
     if st.session_state.logged_in:
         st.success(f"Welcome back, {st.session_state.username}!")
-        st.page_link("pages/profile.py", label="Go to your Profile")
+        st.page_link("pages/profile.py", label="Go to your Profile Page")
         return
 
     choice = st.radio("", ["Login", "Sign Up"], horizontal=True)
