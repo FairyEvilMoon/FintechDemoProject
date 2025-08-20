@@ -3,23 +3,11 @@ from utils.auth import get_users, save_users, hash_password, verify_password
 
 st.set_page_config(page_title="Modern Login", page_icon="🔑", layout="centered", initial_sidebar_state="collapsed")
 
-# --- HIDE THE SIDEBAR ---
-st.markdown(
-    """
-<style>
-    [data-testid="collapsedControl"] {
-        display: none
-    }
-</style>
-""",
-    unsafe_allow_html=True,
-)
-
 
 def login_page():
-    st.title("Modern Login & Sign Up")
-    st.markdown("---")
-
+    left_co, cent_co,last_co = st.columns(3)
+    with cent_co:
+        st.image("assets\logo.png",)
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
         st.session_state.username = ""
@@ -29,7 +17,7 @@ def login_page():
         st.page_link("pages/profile.py", label="Go to your Profile")
         return
 
-    choice = st.radio("Login or Sign Up", ["Login", "Sign Up"], horizontal=True)
+    choice = st.radio("", ["Login", "Sign Up"], horizontal=True)
 
     if choice == "Login":
         with st.form("login_form"):
