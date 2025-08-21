@@ -1,6 +1,7 @@
 import json
 import streamlit as st
 import hashlib
+from datetime import date
 
 def get_users():
     """Reads user data from the JSON file."""
@@ -22,3 +23,17 @@ def hash_password(password):
 def verify_password(password, hashed_password):
     """Verifies a password against a hashed password."""
     return hash_password(password) == hashed_password
+
+def update_user_profile(username, profile_data):
+    """Updates the profile information for a specific user."""
+    users = get_users()
+    user_found = False
+    for user in users:
+        if user["username"] == username:
+            user.update(profile_data)
+            user_found = True
+            break
+    if user_found:
+        save_users(users)
+        return True
+    return False

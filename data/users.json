@@ -1,6 +1,42 @@
 [
     {
         "username": "CanDan",
-        "password": "8e9b669109df89620b94f2387dc53206a82ddc71d658f8f7a2b3a9b417370d3e"
+        "password": "8e9b669109df89620b94f2387dc53206a82ddc71d658f8f7a2b3a9b417370d3e",
+        "firstName": "Majid dsjddsj",
+        "lastName": "Alqaseer",
+        "dob": "2002-07-02",
+        "avatar": "assets/avatars\\CanDan.png"
+    },
+    {
+        "username": "Potato",
+        "password": "e023f19c34464becd74445fda3f5d8e0efc081722648e702d66899f867599d63",
+        "firstName": "",
+        "lastName": "",
+        "dob": null,
+        "avatar": ""
+    },
+    {
+        "username": "Ayesha",
+        "password": "e023f19c34464becd74445fda3f5d8e0efc081722648e702d66899f867599d63",
+        "firstName": "",
+        "lastName": "",
+        "dob": null,
+        "avatar": ""
+    },
+    {
+        "username": "CanDan1",
+        "password": "d70cc4a2792287a07189b70823920e7270f3d30b5d3d93abd2daff1d16115a83",
+        "firstName": "",
+        "lastName": "",
+        "dob": null,
+        "avatar": ""
+    },
+    {
+        "username": "pOTATO",
+        "password": "cbffa6aca4db0edef1c5eba94d5e3cd85b41c1c99dcc7be5114d8f03605fd9e0",
+        "firstName": "",
+        "lastName": "",
+        "dob": null,
+        "avatar": ""
     }
 ]
