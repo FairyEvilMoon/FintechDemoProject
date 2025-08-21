@@ -7,12 +7,11 @@ import base64
 
 st.set_page_config(page_title="User Profile", page_icon="👤", layout="centered")
 
-# ---------- Constants and Setup ----------
 AVATAR_DIR = "assets/avatars"
 if not os.path.exists(AVATAR_DIR):
     os.makedirs(AVATAR_DIR)
 
-# ---------- Helper Function for Encoding Image ----------
+# Helper Function for Encoding Image
 def get_image_as_base64(path):
     """Encodes a local image file to a base64 string for display."""
     try:
@@ -22,12 +21,12 @@ def get_image_as_base64(path):
         # This can happen if the path is saved but the file is deleted
         return None
 
-# ---------- Custom CSS for Styling ----------
+#Custom CSS for Styling
 st.markdown("""
 <style>
 .main > div { max-width: 820px; margin: auto; }
 
-/* Styles for the circular avatar display */
+/* circular avatar display */
 .avatar-display {
     width: 128px;
     height: 128px;
@@ -40,7 +39,7 @@ st.markdown("""
     margin-right: auto;
 }
 
-/* Vertically center the content in the uploader column */
+/* Vertically center the content */
 .uploader-container {
     display: flex;
     flex-direction: column;
@@ -50,22 +49,22 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- Auth guard ----------
+# Authentication
 if not st.session_state.get("logged_in"):
     st.warning("Please log in to view your profile.")
     st.page_link("login.py", label="Go to Login")
     st.stop()
 
-# ---------- Load current user ----------
+# Load current user
 users = get_users()
 current_user = next((u for u in users if u["username"] == st.session_state.username), None)
 
-# ---------- Title ----------
+# Title 
 st.title(f"Welcome to your profile, {st.session_state.username}!")
 st.markdown("---")
 
 
-# ---------- NEW INTERACTIVE AVATAR SECTION ----------
+# Avatar Image
 col1, col2 = st.columns([1, 2])
 with col1:
     avatar_path = (current_user or {}).get("avatar")
@@ -77,7 +76,6 @@ with col1:
         # Default placeholder avatar
         st.markdown('<img src="https://static.streamlit.io/examples/cat.jpg" class="avatar-display">', unsafe_allow_html=True)
 
-# The file uploader is now placed here, visually next to the avatar
 with col2:
     st.markdown('<div class="uploader-container">', unsafe_allow_html=True)
     avatar_upload = st.file_uploader(
@@ -90,7 +88,7 @@ with col2:
     st.markdown('</div>', unsafe_allow_html=True)
 
 
-# ---------- PROFILE EDIT FORM ----------
+# EDIT FORM
 with st.container():
     st.markdown("### Edit Your Information")
 
@@ -123,14 +121,12 @@ with st.container():
             }
             has_changes = False
 
-            # --- ROBUST FILE HANDLING ---
-            # Check if a new avatar was uploaded in the section above
             if avatar_upload is not None:
                 try:
                     img = Image.open(avatar_upload)
-                    img = img.convert("RGB") # Standardize image format
+                    img = img.convert("RGB")
 
-                    # Save the new avatar with a consistent name
+                    # save avatar
                     new_avatar_filename = f"{st.session_state.username}.png"
                     new_avatar_path = os.path.join(AVATAR_DIR, new_avatar_filename)
                     img.save(new_avatar_path, "PNG")
@@ -147,13 +143,12 @@ with st.container():
             if update_user_profile(st.session_state.username, profile_data):
                 st.success("Profile updated successfully!")
                 st.toast("Saved!", icon="✅")
-                # Rerun the script to show all changes immediately
                 st.rerun()
             else:
                 st.error("Failed to save your profile. Please try again.")
 
 
-# ---------- Logout Buttons ----------
+# Logout Buttons
 st.markdown("---")
 colL, colR = st.columns(2)
 with colL:
@@ -161,5 +156,5 @@ with colL:
         st.switch_page("login.py")
 with colR:
     if st.button("Logout", type="secondary", use_container_width=True):
-        st.session_state.clear() # Clear the session for a clean logout
+        st.session_state.clear()
         st.switch_page("login.py")
