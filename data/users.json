@@ -4,6 +4,15 @@
         "password": "8e9b669109df89620b94f2387dc53206a82ddc71d658f8f7a2b3a9b417370d3e",
         "firstName": "Majid",
         "lastName": "Alqaseer",
-        "dob": "2002-07-02"
+        "dob": "2002-07-02",
+        "avatar": "assets/avatars\\CanDan.png"
+    },
+    {
+        "username": "Potato",
+        "password": "e023f19c34464becd74445fda3f5d8e0efc081722648e702d66899f867599d63",
+        "firstName": "",
+        "lastName": "",
+        "dob": null,
+        "avatar": ""
     }
 ]
